@@ -20,6 +20,68 @@ class Calculadora{//Conjunto de operaciones
 	{
 		return parseInt(this.Numero1)/parseInt(this.Numero2);
 	}
+	
+
+	Sumaasinc()
+	{
+		var objeto=this;
+		return new Promise(function(resolve,reject)
+		{
+			try
+			{
+				resolve(parseInt(objeto.Numero1)+parseInt(objeto.Numero2));
+			}
+			catch(err)
+			{
+				reject(err.mesage)
+			}
+		});
+	}
+	Restaasinc()
+	{
+		var objeto=this;
+		return new Promise(function(resolve,reject)
+		{
+			try
+			{
+				resolve(parseInt(objeto.Numero1)-parseInt(objeto.Numero2));
+			}
+			catch(err)
+			{
+				reject(err.mesage)
+			}
+		});
+	}
+	Multiplicacionasinc()
+	{
+		var objeto=this;
+		return new Promise(function(resolve,reject)
+		{
+			try
+			{
+				resolve(parseInt(objeto.Numero1)*parseInt(objeto.Numero2));
+			}
+			catch(err)
+			{
+				reject(err.mesage)
+			}
+		});
+	}
+	Divisionasinc()
+	{
+		var objeto=this;
+		return new Promise(function(resolve,reject)
+		{
+			try
+			{
+				resolve(parseInt(objeto.Numero1)/parseInt(objeto.Numero2));
+			}
+			catch(err)
+			{
+				reject(err.mesage)
+			}
+		});
+	}
 }
 
 let G_Numero1=0;
@@ -48,19 +110,41 @@ function igual(){//Guarda el valor del segundo número y envía los valores para
 	switch(G_Signo){
 
 		case 'Suma'://En caso de ser una suma envía los valores a la función de sumar
-			document.getElementById('numintrod').value=claseinstanciada.Suma();
+			claseinstanciada.Sumaasinc().then(function(response)//Envia los datos a la funcion asincrona de la suma
+				{
+					document.getElementById('numintrod').value=response;//Recibe el resultado de la suma y lo muestra en pantalla
+				},function(error)
+				{
+					alert("No se pudo prro");//En caso de error muestra un mensaje
+				});
 		break;
 
 		case 'Resta'://En caso de ser una resta envía los valores a la función de restar
-			document.getElementById('numintrod').value=claseinstanciada.Resta();
+			claseinstanciada.Restaasinc().then(function(response)//Envia los datos a la funcion asincrona de la reta
+				{
+					document.getElementById('numintrod').value=response;//Recibe el resultado de la resta y lo muestra en pantalla
+				},function(error)
+				{
+					alert("No se pudo prro");//En caso de error muestra un mensaje
+				});
 		break;
 
 		case 'Division'://En caso de ser una división envía los valores a la función de dividir
-			document.getElementById('numintrod').value=claseinstanciada.Division();
+			claseinstanciada.Divisionasinc().then(function(response)//Envia los datos a la funcion asincrona de la división
+				{
+					document.getElementById('numintrod').value=response;//Recibe el resultado de la división y lo muestra en pantalla
+				},function(error){
+					alert("No se pudo prro");//En caso de error muestra un mensaje
+				});
 		break;
 
-		case 'Multiplicacion'://En caso de ser una multiplicación envía los valores a la función de multiplicar
-			document.getElementById('numintrod').value=claseinstanciada.Multiplicacion();
+		case 'Multiplicacion'://En caso de ser una multiplicación envía los valores a la función de multiplicar document.getElementById('numintrod').value=claseinstanciada.Multiplicacion();
+			claseinstanciada.Multiplicacionasinc().then(function(response)//Envia los datos a la funcion asincrona de la multiplicación
+				{
+					document.getElementById('numintrod').value=response;//Recibe el resultado de la multiplicación y lo muestra en pantalla
+				},function(error){
+					alert("No se pudo prro");//En caso de error muestra un mensaje
+				});
 		break;
 	}
 }
